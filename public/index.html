@@ -2,9 +2,44 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="/style.css">
+<link href="https://fonts.googleapis.com/css?family=Courgette|Poiret+One" rel="stylesheet">
 </head>
 <body>
+
+
+    <center><h1 class="heading">Image Board Project!</h1></center>
+    <hr>
+
+    <div id="main">
+
+<div v-for = "images in images" class="card">
+    <img :src="images.url" class="image"/>
+    <div>
+        <center><p>{{ images.title }}</p></center>
+    </div>
+</div>
+
+
+    </div>
+
+
+
+    <!-- <div id="main">
+
+     <looping through array  -->
+     <!-- <ul v-for = "item in pokemon"><li>{{ item }}</li></ul>
+     <p v-for = "animal in cuteanimals">{{ animal.name }}, {{ animal.cuteScore}}</p>
+     <img :src="imageSrc" class="img">
+     <p v-if = "int ===1">Int value is equal to ONE</p>
+     <p v-else></p>
+     <p v-for = "pokemon in pokemonArray">{{ pokemon }}</p>
+    </div>  -->
+
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

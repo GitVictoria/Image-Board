@@ -1,0 +1,39 @@
+* {
+    z-index: 1;
+    font-family: "Poiret One", cursive;
+}
+
+body {
+    background-image: url("brickwall.jpg");
+}
+
+#main {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 20px;
+}
+
+.heading {
+    font-size: 40px;
+    letter-spacing: 3px;
+}
+
+p {
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card {
+    z-index: 100;
+    border: 1px solid black;
+    width: 470px;
+    border-radius: 5%;
+    background: none;
+}
+
+.image {
+    padding: 10px;
+    height: 400px;
+    width: 450px;
+}
