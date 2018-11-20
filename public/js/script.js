@@ -8,9 +8,9 @@
             var self = this;
             console.log(self);
             axios.get("/images").then(function(response) {
-                console.log("response: ", response.data.rows);
+                console.log("response: ", response.data);
 
-                self.images = response.data.rows;
+                self.images = response.data;
             });
         }
     });
