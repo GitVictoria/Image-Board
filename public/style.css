@@ -8,14 +8,24 @@ body {
 }
 
 #main {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .heading {
     font-size: 40px;
     letter-spacing: 3px;
+}
+
+.inputField {
+    width: 200px;
+    height: 30px;
+    font-size: 15px;
+}
+
+button {
+    cursor: pointer;
 }
 
 p {
@@ -30,6 +40,7 @@ p {
     width: 470px;
     border-radius: 5%;
     background: none;
+    margin-top: 15px;
 }
 
 .image {

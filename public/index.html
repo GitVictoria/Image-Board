@@ -8,10 +8,19 @@
 <body>
 
 
-    <center><h1 class="heading">Image Board Project!</h1></center>
+    <center><h1 class="heading">Image Board by Victoria</h1></center>
     <hr>
 
     <div id="main">
+        <div class="">
+            <form>
+                <input class="inputField" v-model= "form.title" type="text" name="title"  placeholder="title">
+                <input class="inputField"v-model= "form.description" type="text" name="description"  placeholder="description">
+                <input class="inputField" v-model= "form.username" type="text" name="username"  placeholder="username">
+                <input class="inputField"type="file" accept="image/*" @change = "handleFileChnage">
+                <button class="inputField" @click = "uploadFile" type="submit" name="button">Upload</button>
+            </form>
+        </div>
 
 <div v-for = "images in images" class="card">
     <img :src="images.url" class="image"/>
@@ -21,7 +30,10 @@
 </div>
 
 
+
     </div>
+
+
 
 
 

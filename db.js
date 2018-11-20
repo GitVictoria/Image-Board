@@ -8,3 +8,12 @@ exports.getImages = () => {
         FROM images`
     );
 };
+
+exports.storeImages = (title, description, url, username) => {
+    return db.query(
+        `INSERT INTO images (title, description, url, username)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *`,
+        [title, description, url, username]
+    );
+};
