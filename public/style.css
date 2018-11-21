@@ -7,6 +7,23 @@ body {
     background-image: url("brickwall.jpg");
 }
 
+#div {
+    /* position: relative;
+    background-color: azure;
+    z-index: 100;
+    
+     */
+    background-color: none;
+    border: 1px solid black;
+    height: 500px;
+    width: 800px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 #main {
     display: flex;
     flex-wrap: wrap;
@@ -35,7 +52,7 @@ p {
 }
 
 .card {
-    z-index: 100;
+    z-index: 1;
     border: 1px solid black;
     width: 470px;
     border-radius: 5%;
@@ -44,6 +61,7 @@ p {
 }
 
 .image {
+    z-index: 1;
     padding: 10px;
     height: 400px;
     width: 450px;

@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 const s3 = require("./s3");
+var path = require("path");
+
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 // const csurf = require("csurf");
 
@@ -15,7 +19,6 @@ app.use(express.static("./public"));
 // BOILER PLATE TO UPLOAD FILES TO THE SERVER
 var multer = require("multer"); // takes image and puts in in uploads
 var uidSafe = require("uid-safe");
-var path = require("path");
 
 var diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -70,6 +73,17 @@ app.get("/images", (req, res) => {
     db.getImages()
         .then(results => {
             res.json(results.rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.get("/images/:id", (req, res) => {
+    db.getImageById(req.params.id)
+        .then(results => {
+            res.json(results.rows);
+            console.log("this s RESPONSE:", results);
         })
         .catch(err => {
             console.log(err);
