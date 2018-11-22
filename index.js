@@ -69,6 +69,18 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     }
 });
 
+app.post("/comments", (req, res) => {
+    console.log(req.body);
+    db.storeComment(req.body.comment, req.body.username)
+        .then(results => {
+            console.log("results in post comments: ", results);
+            res.json(results);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
 app.get("/images", (req, res) => {
     db.getImages()
         .then(results => {

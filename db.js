@@ -14,9 +14,35 @@ exports.getImages = () => {
 exports.storeImages = (title, description, url, username) => {
     return db.query(
         `INSERT INTO images (title, description, url, username)
-        VALUES ($1, $2, $3, $4)
+        VALUES ($1, $2, $3, $4,)
         RETURNING *`,
         [title, description, url, username]
+    );
+};
+
+exports.storeComment = (image_id, username, comment, published_at) => {
+    return db.query(
+        `INSERT INTO comments (image_id, username, comment, published_at)
+        VALUES ($1, $2, $3, $4,)
+        RETURNING *`,
+        [image_id, username, comment, published_at]
+    );
+};
+
+// CREATE TABLE comments(
+//     id SERIAL PRIMARY KEY,
+//     image_id INTEGER NOT NULL REFERENCES images(id),
+//     username VARCHAR(255) NOT NULL,
+//     comment VARCHAR(800) NOT NULL,
+//     published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+// );
+
+exports.getComment = comment => {
+    return db.query(
+        `SELECT comment
+        FROM comments
+        WHERE id = image_id`,
+        [comment]
     );
 };
 

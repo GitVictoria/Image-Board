@@ -44,6 +44,8 @@
         },
         mounted: function() {
             var self = this;
+            // self.showComponent = true; DOES NOT SET IT
+
             console.log(
                 "Vue comp is logging this ID in mounted: ",
                 self.imageId
@@ -62,12 +64,18 @@
             });
         },
         methods: {
+            submitComment: function(e) {
+                e.preventDefault();
+                this.$emit("submit-comment");
+                console.log("submit button should pass to DB");
+            },
+
             handleClick: function() {
                 console.log("handleClick is running");
             },
             closeTheComponent: function() {
                 this.$emit("close-component");
-                this.showComponent = false;
+                // this.showComponent = true; DOES NOT SET IT. WHY?
             }
         }
     });
@@ -85,6 +93,10 @@
                 description: "",
                 username: "",
                 file: null
+            },
+            form1: {
+                comment: "",
+                username: ""
             }
         },
         mounted: function() {
@@ -101,6 +113,20 @@
         }, // mounted ends here
 
         methods: {
+            submitComment: function() {
+                var self = this;
+
+                var formData = new FormData();
+                formData.append("comment", this.form1.comment);
+                formData.append("username", this.form1.username);
+                // put the coment into database
+                axios.post("/comments", formData).then(function(resp) {
+                    // self.images.unshift(resp.data.results[0]);
+                    console.log("resp:", resp);
+                });
+                console.log("Submit comments is ready for axios");
+            },
+
             toggleComponent: function(e) {
                 var self = this;
                 self.imageId = e.target.id;
@@ -125,7 +151,7 @@
 
             //     this.imageId = idOfImageThatWasClicked;
             closeComponent() {
-                this.showComponent = false;
+                this.imageId = null;
             },
             // mounted function in the vue
             //axios function

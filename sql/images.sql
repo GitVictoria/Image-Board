@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS comments;
 
 CREATE TABLE images(
     id SERIAL PRIMARY KEY,
@@ -8,6 +9,18 @@ CREATE TABLE images(
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    image_id INTEGER NOT NULL REFERENCES images(id),
+    username VARCHAR(255) NOT NULL,
+    comment VARCHAR(800) NOT NULL,
+    published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ALTER TABLE images ADD comments VARCHAR(255);
+
+
 
 INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/spicedling/jAVZmnxnZ-U95ap2-PLliFFF7TO0KqZm.jpg',

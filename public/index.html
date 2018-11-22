@@ -31,10 +31,10 @@ colon indicated that whats after the equal sign is VUE
   -->
      <a :href = " '#' +image.id">
         <img :id="image.id" :src="image.url" class="image"/>
-    </a>
         <div>
             <center><p>{{ images.title }}</p></center>
         </div>
+        </a>
     </div>
 </div>
 
@@ -45,7 +45,7 @@ colon indicated that whats after the equal sign is VUE
 
 
 
-<image-component :image-id = "imageId" v-if = "imageId" @click = "toggleComponent" @close-component = "closeComponent"> </image-component>
+<image-component :image-id = "imageId" v-if = "imageId" @click = "toggleComponent" @close-component = "closeComponent" @submit-comment="submitComment"></image-component>
 
 
 
@@ -59,7 +59,30 @@ colon indicated that whats after the equal sign is VUE
         <img class="largeImage"  :src="img.url"/>
         <hr>
         <hr>
-         <h1 @click = "closeTheComponent">X</h1>
+
+
+
+         <p>Title: {{img.title}}</p>
+         <p>Description: {{img.description}}</p>
+         <p>This image was added by: {{img.username}} on {{img.created_at}}</p>
+         <hr>
+         <hr>
+         <p>Please add your comment here </p>
+<form>
+    <input class="username" type="text" placeholder="Username">
+             <input class="commentsField" type="text" name="comment"  placeholder="Please enter your comment here">
+             <button type="submit" name="button" @click="submitComment">Submit</button>
+         </form>
+<hr>
+<p>Previous comments</p>
+<!-- {{RENDER COMMENTS}} -->
+
+         <hr>
+         <hr>
+         <h1 class="X" @click = "closeTheComponent">X</h1>
+
+
+
 
      </div></center>
 
