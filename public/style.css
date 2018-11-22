@@ -7,17 +7,22 @@ body {
     background-image: url("brickwall.jpg");
 }
 
+.largeImage {
+    height: 600px;
+    width: 800px;
+    z-index: 100;
+}
+
 #div {
     /* position: relative;
     background-color: azure;
-    z-index: 100;
-    
-     */
+    z-index: 100; */
+
     background-color: none;
     border: 1px solid black;
     height: 500px;
     width: 800px;
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);

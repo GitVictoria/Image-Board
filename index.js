@@ -82,12 +82,25 @@ app.get("/images", (req, res) => {
 app.get("/images/:id", (req, res) => {
     db.getImageById(req.params.id)
         .then(results => {
-            res.json(results.rows);
-            console.log("this s RESPONSE:", results);
+            res.json(results);
+            console.log("this server RESPONSE:", results);
         })
         .catch(err => {
             console.log(err);
         });
+});
+
+app.get("get-more-images/:id", (req, res) => {
+    var lastId = req.params.id;
+    db.getMoreImages(lastId)
+        .then(images => {
+            res.json(images);
+            console.log("images in get more images: ", images);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    console.log("req.params.id: ", req.params.id);
 });
 
 app.listen(8080, () => ca.rainbow("Listening, let's GO!"));

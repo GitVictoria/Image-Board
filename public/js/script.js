@@ -29,19 +29,36 @@
                 img: {
                     created_at: "",
                     description: "",
+                    imageId: "",
                     title: "",
+                    lastId: "",
                     url: "",
                     username: ""
                 }
             };
         },
+        watch: {
+            imageId: function() {
+                console.log("watcher running!", this.imageId);
+            }
+        },
         mounted: function() {
-            console.log("this is Vue image id", this.imageId);
             var self = this;
-            axios.get("/images/" + this.imageId).then(function(response) {
-                console.log("/images/" + this.imageId);
+            console.log(
+                "Vue comp is logging this ID in mounted: ",
+                self.imageId
+            );
+
+            axios.get("/images/" + self.imageId).then(function(response) {
+                console.log("images id: ", "/images/" + self.imageId);
+
+                self.img.created_at = response.data.rows[0].created_at;
+                self.img.description = response.data.rows[0].description;
+                self.img.description = response.data.rows[0].id;
                 self.img.title = response.data.rows[0].title;
-                console.log("Another Vue component: ", this);
+                self.img.lastId = response.data.rows[0].last_id;
+                self.img.url = response.data.rows[0].url;
+                self.img.username = response.data.rows[0].username;
             });
         },
         methods: {
@@ -61,7 +78,7 @@
         data: {
             firstName: "Victoria Almazova",
             images: [],
-            imageId: 0,
+            imageId: location.hash.slice(1) || 0,
             showComponent: false,
             form: {
                 title: "",
@@ -71,9 +88,13 @@
             }
         },
         mounted: function() {
-            console.log("the image ID is", this.imageId);
-
             var self = this;
+
+            window.addEventListener("hashchange", function() {
+                console.log("hash has changed", location.hash.slice(1));
+                self.imageId = location.hash.slice(1);
+            });
+
             axios.get("/images").then(function(response) {
                 self.images = response.data;
             });
@@ -83,10 +104,25 @@
             toggleComponent: function(e) {
                 var self = this;
                 self.imageId = e.target.id;
-                console.log("this is image  ", self.imageId);
-                // this.showComponent = true;
-                // console.log("I am clicking ..");
+                console.log("this is image id ", self.imageId);
+                // get image and comments and pass it to VUE
             },
+
+            getMoreImages: function() {
+                var self = this;
+                console.log("All the images", this.images);
+                var lastId = this.images[this.images.length - 1].id;
+                console.log(
+                    "this.images.length - 1: ",
+                    this.images[this.images.length - 1]
+                );
+                // GET /get-more-images/44
+                axios.get("/get-more-images/" + lastId).then(function(resp) {
+                    self.images.push.apply(self.images, resp.data);
+                    console.log("resp in /get-more-images: ", resp);
+                });
+            },
+
             //     this.imageId = idOfImageThatWasClicked;
             closeComponent() {
                 this.showComponent = false;
@@ -121,3 +157,29 @@
 // main vue instance is responsiblr for when component shows
 //set property in data on vue instance
 // set it to true for when user clicks
+
+/// MORE button
+// IF you click on more button and there are no more images
+// button goes away in axios if resp.data is empty => GO AWAY BUTTON
+
+// Check what is the last ID in the array that I just got last image in the array HAS ID 1
+// if the last image in the array ID = 1 then BUTTON GO AWAY
+
+// figure out what is the last ID in the database
+// gould be another query
+// do a sub quey (a query within a query )
+// in the get More Image
+
+//take the id of the image we click on
+// put that id into the url
+// the id of the image appears in the url
+// sharing the url
+// if the user puts in something in the url that doesnt correspond to an id of an image in database
+// we don't want to do anything
+// we have to listen for when the imageId in the componenet has chaged
+// if the ID has changed then we have to re-run mounted function
+
+// exactly same process as in the mounted fucntion passed to VUE
+// so when i change the ur with a new ID the new image shows up
+//
+//

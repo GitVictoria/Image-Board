@@ -24,12 +24,21 @@
 
 <div v-for = "image in images" class="card">
  <div @click="toggleComponent" @click = "handleClick">
+     <!-- #13
+ the url that i wanna re-direct to has the hash symbol followed by the
+CLIENT SITE ROUTING
+colon indicated that whats after the equal sign is VUE
+  -->
+     <a :href = " '#' +image.id">
         <img :id="image.id" :src="image.url" class="image"/>
-        <!-- <div>
+    </a>
+        <div>
             <center><p>{{ images.title }}</p></center>
-        </div> -->
+        </div>
     </div>
 </div>
+
+<button type="button" name="button" @click="getMoreImages">More</button>
 
 <!-- <some-component :first-name = "firstName" "></some-component>
 <!- green one refers to DATA orange one refers to PROPS -->
@@ -44,12 +53,15 @@
     </div>
 
     <script id=image type="text/x-template">
-
         <center><div id="div">
-        <img class="largeImage" :src="image.url"/>
-         <h1 @click = "closeTheComponent">x</h1>
 
-        </div></center>
+
+        <img class="largeImage"  :src="img.url"/>
+        <hr>
+        <hr>
+         <h1 @click = "closeTheComponent">X</h1>
+
+     </div></center>
 
     </script>
 
