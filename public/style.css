@@ -14,13 +14,18 @@ body {
     border: 3px solid grey;
 }
 
+#image {
+    width: 500px;
+}
+
 #div {
     /* position: relative;
     background-color: azure;
     z-index: 100; */
 
-    background-color: white;
+    background-color: #ffffffc7;
     position: absolute;
+    overflow: scroll;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -28,9 +33,17 @@ body {
 }
 
 #main {
+    width: 100%;
+    /* padding-top: 100px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.uploadForm {
+    z-index: 10000;
+    margin-right: 50px;
+    margin-bottom: 50px;
 }
 
 .X {
@@ -61,17 +74,56 @@ p {
 }
 
 .card {
+    overflow: hidden;
+    transform: rotate(30deg);
     z-index: 1;
-    border: 1px solid black;
-    width: 470px;
-    border-radius: 5%;
+    border: 1px solid #847577;
+    width: 370px;
+    /* border-radius: 5%; */
+    /* background: #fbfbf2; */
     background: none;
-    margin-top: 15px;
+    margin-top: 50px;
+    margin-left: -10px;
 }
 
 .image {
+    border: 2px solid #847577;
+    transform: rotate(-30deg);
     z-index: 1;
     padding: 10px;
-    height: 400px;
-    width: 450px;
+    height: 300px;
+    width: 350px;
+}
+
+.moreButton {
+    font-size: 20px;
+    margin: 20px;
+    width: 300px;
+    height: 30px;
+}
+
+.commentsField {
+    width: 400px;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.name {
+    height: 30px;
+    font-size: 20px;
+}
+
+.noMoreImages {
+    font-size: 20px;
+    margin: 20px;
+    width: 300px;
+    height: 30px;
+    background-color: #ffffff36;
+}
+
+.delete {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
 }

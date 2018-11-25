@@ -8,19 +8,42 @@
 <body>
 
 
-    <center><h1 class="heading">Image Board by Victoria</h1></center>
+    <center><h1 class="heading">Mood     Board by Victoria</h1></center>
     <hr>
 
     <div id="main">
-        <div class="">
+        <center>
+        <div class="uploadForm">
+
             <form>
-                <input class="inputField" v-model= "form.title" type="text" name="title"  placeholder="title">
-                <input class="inputField"v-model= "form.description" type="text" name="description"  placeholder="description">
-                <input class="inputField" v-model= "form.username" type="text" name="username"  placeholder="username">
-                <input class="inputField"type="file" accept="image/*" @change = "handleFileChnage">
-                <button class="inputField" @click = "uploadFile" type="submit" name="button">Upload</button>
+                <!-- <div > -->
+                    <input class="inputField" v-model= "form.title" type="text" name="title"  placeholder="title">
+                <!-- </div>
+                <div > -->
+                    <input class="inputField"v-model= "form.description" type="text" name="description"  placeholder="description">
+                <!-- </div>
+                <div > -->
+                    <input class="inputField" v-model= "form.username" type="text" name="username"  placeholder="username">
+                <!-- </div>
+                <div > -->
+                    <input class="inputField"type="file" accept="image/*" @change = "handleFileChnage">
+                <!-- </div>
+                <div > -->
+                    <button class="inputField" @click = "uploadFile" type="submit" name="button">Upload</button>
+
+                <!-- </div>
+                <div > -->
+
+                <!-- </div> -->
+
+
+
+
+
             </form>
+
         </div>
+        </center>
 
 <div v-for = "image in images" class="card">
  <div @click="toggleComponent" @click = "handleClick">
@@ -35,17 +58,22 @@ colon indicated that whats after the equal sign is VUE
             <center><p>{{ images.title }}</p></center>
         </div>
         </a>
+
     </div>
 </div>
-
-<button type="button" name="button" @click="getMoreImages">More</button>
-
-<!-- <some-component :first-name = "firstName" "></some-component>
-<!- green one refers to DATA orange one refers to PROPS -->
-
+<div class="footer">
+    <button type="button" name="button" class="moreButton" @click="getMoreImages" v-if="showMore">More</button>
+        <button class="noMoreImages" type="button" name="button" class="moreButton" v-if="!showMore">No more images to show</button>
+</div>
 
 
-<image-component :image-id = "imageId" v-if = "imageId" @click = "toggleComponent" @close-component = "closeComponent" @submit-comment="submitComment"></image-component>
+
+
+
+
+
+
+<image-component :image-id = "imageId" v-if = "imageId" @click = "toggleComponent" @close-component = "closeComponent" ></image-component>
 
 
 
@@ -62,24 +90,38 @@ colon indicated that whats after the equal sign is VUE
 
 
 
-         <p>Title: {{img.title}}</p>
-         <p>Description: {{img.description}}</p>
+         <p>Title of the Image: {{img.title}}</p>
+         <!-- <p>Description: {{img.description}}</p> -->
          <p>This image was added by: {{img.username}} on {{img.created_at}}</p>
          <hr>
          <hr>
-         <p>Please add your comment here </p>
+         <p>Any thoughts? </p>
 <form>
-    <input class="username" type="text" placeholder="Username">
-             <input class="commentsField" type="text" name="comment"  placeholder="Please enter your comment here">
+    <input v-model="form1.name" name="name"class="name" type="text" placeholder="Your Name">
+             <input v-model="form1.comment" class="commentsField" type="text" name="comment"  placeholder="Please enter your comment here">
              <button type="submit" name="button" @click="submitComment">Submit</button>
          </form>
+<!-- <hr>
+
+<!-{{RENDER COMMENTS}} -->
 <hr>
 <p>Previous comments</p>
-<!-- {{RENDER COMMENTS}} -->
+
+<div v-for = "item in comment"><p><strong>{{item.comment}}</strong></p>
+    <p>{{item.username}}</p>
+    <p>{{item.published_at}}</p>
+    <hr>
+
+</div>
+
+
+
 
          <hr>
-         <hr>
          <h1 class="X" @click = "closeTheComponent">X</h1>
+                  <hr>
+                  <img class="delete" src="noun_Delete_1144249.png"/>
+
 
 
 

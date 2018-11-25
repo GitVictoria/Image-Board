@@ -70,11 +70,22 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 });
 
 app.post("/comments", (req, res) => {
-    console.log(req.body);
-    db.storeComment(req.body.comment, req.body.username)
+    console.log("this is Req.body of comments: ", req.body);
+    db.storeComment(req.body.image_id, req.body.comment, req.body.username)
         .then(results => {
             console.log("results in post comments: ", results);
             res.json(results);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.get("/comments", (req, res) => {
+    console.log("this is get comments server resp, HEY");
+    db.getComment()
+        .then(results => {
+            res.json(results.rows);
         })
         .catch(err => {
             console.log(err);
@@ -92,7 +103,7 @@ app.get("/images", (req, res) => {
 });
 
 app.get("/images/:id", (req, res) => {
-    db.getImageById(req.params.id)
+    Promise.all([db.getImageById(req.params.id), db.getComment(req.params.id)])
         .then(results => {
             res.json(results);
             console.log("this server RESPONSE:", results);
@@ -102,7 +113,7 @@ app.get("/images/:id", (req, res) => {
         });
 });
 
-app.get("get-more-images/:id", (req, res) => {
+app.get("/get-more-images/:id", (req, res) => {
     var lastId = req.params.id;
     db.getMoreImages(lastId)
         .then(images => {
