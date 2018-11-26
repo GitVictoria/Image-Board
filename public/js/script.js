@@ -99,6 +99,9 @@
             closeTheComponent: function() {
                 this.$emit("close-component");
                 // this.showComponent = true; DOES NOT SET IT. WHY?
+            },
+            del: function() {
+                this.$emit("del");
             }
         }
     });
@@ -179,6 +182,19 @@
             },
             handleFileChnage: function(e) {
                 this.form.file = e.target.files[0];
+            },
+            del: function() {
+                var self = this;
+                axios.post("/del/" + this.imageId).then(function(resp) {
+                    if (resp) {
+                        self.images = self.images.filter(function(img) {
+                            return img.id != self.imageId; // creating a new array where I push out an object where id doesn't pass the test
+                        });
+
+                        console.log("DELETE REQ RECEIVED A RESP");
+                        self.imageId = null;
+                    }
+                });
             }
         } // end of methods
     });

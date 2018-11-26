@@ -126,4 +126,16 @@ app.get("/get-more-images/:id", (req, res) => {
     console.log("req.params.id: ", req.params.id);
 });
 
+app.post("/del/:id", (req, res) => {
+    db.deleteComments(req.params.id)
+        .then(() => db.delete(req.params.id))
+        .then(results => {
+            res.json(results);
+            console.log("DELETE REQUEST RESULTS ARE: ", results);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
 app.listen(8080, () => ca.rainbow("Listening, let's GO!"));

@@ -11,6 +11,22 @@ exports.getImages = () => {
     );
 };
 
+exports.delete = id => {
+    return db.query(
+        `DELETE FROM images
+        WHERE id = $1`,
+        [id]
+    );
+};
+
+exports.deleteComments = image_id => {
+    return db.query(
+        `DELETE FROM comments
+        WHERE image_id = $1`,
+        [image_id]
+    );
+};
+
 exports.storeImages = (title, description, url, username) => {
     return db.query(
         `INSERT INTO images (title, description, url, username)

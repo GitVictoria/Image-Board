@@ -8,7 +8,7 @@
 <body>
 
 
-    <center><h1 class="heading">Mood     Board by Victoria</h1></center>
+    <center><h1 class="heading">Mood     Board </h1></center>
     <hr>
 
     <div id="main">
@@ -73,7 +73,7 @@ colon indicated that whats after the equal sign is VUE
 
 
 
-<image-component :image-id = "imageId" v-if = "imageId" @click = "toggleComponent" @close-component = "closeComponent" ></image-component>
+<image-component :image-id = "imageId" v-if = "imageId" @click = "toggleComponent" @close-component = "closeComponent" @del="del" ></image-component>
 
 
 
@@ -120,7 +120,7 @@ colon indicated that whats after the equal sign is VUE
          <hr>
          <h1 class="X" @click = "closeTheComponent">X</h1>
                   <hr>
-                  <img class="delete" src="noun_Delete_1144249.png"/>
+                  <img @click="del" class="delete" src="noun_Delete_1144249.png"/>
 
 
 
